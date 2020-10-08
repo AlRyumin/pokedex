@@ -7,4 +7,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ItemPokemonCard" parent="CardView">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardBackgroundColor">@color/itemPokemonBackground</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+    </style>
+
+    <style name="ItemPokemon">
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="ItemPokemonName">
+        <item name="fontFamily">roboto</item>
+        <item name="android:paddingEnd">@dimen/text_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/text_horizontal_padding</item>
+        <item name="android:textSize">@dimen/name_size</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:background">@drawable/name_background</item>
+    </style>
+
 </resources>
