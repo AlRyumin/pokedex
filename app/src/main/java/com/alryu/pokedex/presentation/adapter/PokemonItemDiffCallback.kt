@@ -1,7 +1,7 @@
-package com.alryu.pokedex.adapter
+package com.alryu.pokedex.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.alryu.pokedex.model.Pokemon
+import com.alryu.pokedex.domain.Pokemon
 
 class PokemonItemDiffCallback  : DiffUtil.ItemCallback<Pokemon>() {
     override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {

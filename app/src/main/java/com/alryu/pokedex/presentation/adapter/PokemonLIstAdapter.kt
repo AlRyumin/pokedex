@@ -1,4 +1,4 @@
-package com.alryu.pokedex.adapter
+package com.alryu.pokedex.presentation.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,12 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alryu.pokedex.R
-import com.alryu.pokedex.model.Pokemon
+import com.alryu.pokedex.domain.Pokemon
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 class PokemonListAdapter: ListAdapter<Pokemon, PokemonListAdapter.PokemonViewHolder>(
-    PokemonItemDiffCallback()) {
+    PokemonItemDiffCallback()
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         return PokemonViewHolder(
             LayoutInflater.from(parent.context)

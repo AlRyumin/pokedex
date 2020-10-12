@@ -1,10 +1,10 @@
-package com.alryu.pokedex.view
+package com.alryu.pokedex.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.alryu.pokedex.R
-import com.alryu.pokedex.adapter.PokemonListAdapter
-import com.alryu.pokedex.model.Pokemon
+import com.alryu.pokedex.presentation.adapter.PokemonListAdapter
+import com.alryu.pokedex.domain.Pokemon
 import kotlinx.android.synthetic.main.activity_main.pokemonListRV
 
 class MainActivity : AppCompatActivity() {
