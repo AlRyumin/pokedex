@@ -2,14 +2,18 @@ package com.alryu.pokedex.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.alryu.pokedex.R
 import com.alryu.pokedex.presentation.adapter.PokemonListAdapter
 import com.alryu.pokedex.domain.Pokemon
-import kotlinx.android.synthetic.main.activity_main.pokemonListRV
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val adapter = PokemonListAdapter()
-    val pokemonList = getPockemonList()
+    private val viewModel by viewModels<MainViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,18 +21,36 @@ class MainActivity : AppCompatActivity() {
 
         pokemonListRV.adapter = adapter
 
-        adapter.submitList(pokemonList)
+        viewModel.isLoadingLiveData.observe(this, Observer {
+            loadingView.visibility = if (it) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        })
+
+        viewModel.isErrorLiveData.observe(this, Observer {
+            errorView.visibility = if (it) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        })
+
+        viewModel.contentLiveData.observe(this, Observer { data ->
+            pokemonListRV.visibility = if (data.isNotEmpty()) { //bad
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            setData(data)
+        })
+
+        viewModel.loadData()
     }
 
-    private fun getPockemonList() : List<Pokemon>{
-        //https://pokeapi.co/
-        //https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pok%C3%A9mon)
-        return listOf(
-            Pokemon("1","Bulbasaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("4","Charmander", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"),
-            Pokemon("18","Pidgeot", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png"),
-            Pokemon("25","Pikachu", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"),
-            Pokemon("54","Psyduck", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png")
-        )
+    fun setData(data: List<Pokemon>) {
+        adapter.submitList(data)
     }
+
 }
