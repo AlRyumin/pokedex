@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#000051</color>
     <color name="colorAccent">#ad1457</color>
     <color name="itemPokemonBackground">#E4E1FF</color>
+
+    <color name="progressBar">#293f4f</color>
+    <color name="progressBarBackground">#9db3c8</color>
 </resources>

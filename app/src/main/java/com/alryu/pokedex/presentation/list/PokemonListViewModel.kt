@@ -1,18 +1,17 @@
-package com.alryu.pokedex.presentation
+package com.alryu.pokedex.presentation.list
 
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alryu.pokedex.PokemonRepositoryImpl
 import com.alryu.pokedex.domain.Pokemon
 import com.alryu.pokedex.domain.PokemonRepository
 import kotlin.random.Random
 
-class MainViewModel: ViewModel() {
-    private val repository: PokemonRepository = PokemonRepositoryImpl()
-
+class PokemonListViewModel (
+    val repository: PokemonRepository
+) : ViewModel() {
     private val _isLoadingLiveData = MutableLiveData<Boolean>()
     val isLoadingLiveData: LiveData<Boolean> = _isLoadingLiveData
 
@@ -40,5 +39,4 @@ class MainViewModel: ViewModel() {
             }
         }, 3000)
     }
-
 }

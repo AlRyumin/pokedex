@@ -12,7 +12,6 @@
         <item name="android:minHeight">64dp</item>
         <item name="android:minWidth">64dp</item>
         <item name="cardCornerRadius">8dp</item>
-        <item name="cardBackgroundColor">@color/itemPokemonBackground</item>
         <item name="cardElevation">@dimen/card_elevation</item>
     </style>
 
@@ -27,6 +26,13 @@
         <item name="android:textSize">@dimen/name_size</item>
         <item name="android:textStyle">bold|italic</item>
         <item name="android:background">@drawable/name_background</item>
+    </style>
+
+    <style name="CustomProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:indeterminateTint">@color/progressBar</item>
+        <item name="android:scaleY">10</item>
+        <item name="android:scaleX">2</item>
     </style>
 
 </resources>
