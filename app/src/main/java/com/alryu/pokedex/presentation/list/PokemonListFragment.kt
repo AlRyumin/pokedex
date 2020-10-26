@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.alryu.pokedex.PokemonRepositoryImpl
 import com.alryu.pokedex.R
+import com.alryu.pokedex.data.PokemonRepositoryImpl
 import com.alryu.pokedex.domain.Pokemon
 import com.alryu.pokedex.domain.PokemonRepository
 import com.alryu.pokedex.presentation.adapter.PokemonListAdapter
