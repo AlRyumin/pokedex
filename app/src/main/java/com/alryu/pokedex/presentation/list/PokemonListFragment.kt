@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.alryu.pokedex.R
 import com.alryu.pokedex.data.PokemonRepositoryImpl
 import com.alryu.pokedex.domain.Pokemon
@@ -37,6 +38,14 @@ class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
         )
 
         recyclerView.adapter = adapter
+
+        adapter.pokemonOnClickListener = object : PokemonListAdapter.PokemonItemOnClickListener{
+            override fun onClicked(id: String) {
+                val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(id)
+                findNavController().navigate(action)
+            }
+
+        }
 
         viewModel.isLoadingLiveData.observe(viewLifecycleOwner, Observer {
             if(it){
