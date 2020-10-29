@@ -1,6 +1,7 @@
 package com.alryu.pokedex.presentation.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +16,14 @@ import com.alryu.pokedex.domain.PokemonRepository
 import com.alryu.pokedex.presentation.adapter.PokemonListAdapter
 import kotlinx.android.synthetic.main.fragment_pokemon_list.*
 
-class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
+class PokemonListFragment : Fragment(R.layout.fragment_pokemon_list) {
     private val adapter = PokemonListAdapter()
 
     lateinit var repository: PokemonRepository
+
+    val viewModel by viewModels<PokemonListViewModel>(
+        factoryProducer = { PokemonListViewModelFactory(repository) }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,22 +38,28 @@ class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel by viewModels<PokemonListViewModel>(
-            factoryProducer = { PokemonListViewModelFactory(repository) }
-        )
 
         recyclerView.adapter = adapter
 
-        adapter.pokemonOnClickListener = object : PokemonListAdapter.PokemonItemOnClickListener{
+        adapter.pokemonOnClickListener = object : PokemonListAdapter.PokemonItemOnClickListener {
             override fun onClicked(id: String) {
-                val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(id)
+                val action =
+                    PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(
+                        id
+                    )
                 findNavController().navigate(action)
             }
 
         }
 
+        initView()
+
+        viewModel.loadData()
+    }
+
+    fun initView() {
         viewModel.isLoadingLiveData.observe(viewLifecycleOwner, Observer {
-            if(it){
+            if (it) {
                 loadBackground.visibility = View.VISIBLE
                 loadingView.visibility = View.VISIBLE
 
@@ -59,10 +70,10 @@ class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
         })
 
         viewModel.isErrorLiveData.observe(viewLifecycleOwner, Observer {
-            errorView.visibility = if (it) {
-                View.VISIBLE
+            if (it) {
+                showError()
             } else {
-                View.GONE
+                hideError()
             }
         })
 
@@ -75,7 +86,19 @@ class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
             setData(data)
         })
 
-        viewModel.loadData()
+        reloadButton.setOnClickListener {
+            viewModel.loadData()
+        }
+    }
+
+    fun showError() {
+        errorView.visibility = View.VISIBLE
+        reloadButton.visibility = View.VISIBLE
+    }
+
+    fun hideError() {
+        errorView.visibility = View.GONE
+        reloadButton.visibility = View.GONE
     }
 
     fun setData(data: List<Pokemon>) {

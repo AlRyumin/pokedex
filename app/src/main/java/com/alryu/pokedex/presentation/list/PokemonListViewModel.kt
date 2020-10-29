@@ -39,7 +39,7 @@ class PokemonListViewModel (
                     }
                 })
             }
-        }, 3000)
+        }, 500)
     }
 
     private fun showLoading() {

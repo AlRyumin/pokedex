@@ -1,5 +1,6 @@
 package com.alryu.pokedex.data
 
+import android.util.Log
 import com.alryu.pokedex.domain.Pokemon
 import com.alryu.pokedex.domain.PokemonDetails
 import com.alryu.pokedex.domain.PokemonRepository
@@ -43,8 +44,10 @@ class PokemonRepositoryImpl : PokemonRepository {
                         it.ability.name
                     }
 
+                    Log.i("abilities", "${abilities}")
+
                     val pokemonDetails = PokemonDetails(
-                        pokemonInfo.id, pokemonInfo.name, pokemonInfo.imageUrl, abilities
+                        pokemonInfo.id, pokemonInfo.name, pokemonInfo.imageLargeUrl, abilities
                     )
 
                     callback.onSuccess(pokemonDetails)
