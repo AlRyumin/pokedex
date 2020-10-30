@@ -40,6 +40,7 @@ class PokemonRepositoryImpl : PokemonRepository {
                 val pokemonInfo = response.body()
 
                 if (response.isSuccessful && pokemonInfo != null) {
+                    Log.i("pokemonInfo", "${pokemonInfo}")
                     val abilities = pokemonInfo.abilities.map {
                         it.ability.name
                     }
@@ -47,7 +48,7 @@ class PokemonRepositoryImpl : PokemonRepository {
                     Log.i("abilities", "${abilities}")
 
                     val pokemonDetails = PokemonDetails(
-                        pokemonInfo.id, pokemonInfo.name, pokemonInfo.imageLargeUrl, abilities
+                        pokemonInfo.id, pokemonInfo.name, pokemonInfo.height, pokemonInfo.weight, pokemonInfo.imageLargeUrl, abilities
                     )
 
                     callback.onSuccess(pokemonDetails)

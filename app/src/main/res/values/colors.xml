@@ -7,4 +7,12 @@
 
     <color name="progressBar">#293f4f</color>
     <color name="progressBarBackground">#9db3c8</color>
+
+    <color name="progressViewBackground">#FFFFFF</color>
+    <color name="progressViewProgress">#1a237e</color>
+    <color name="progressViewProgress2">#ad1457</color>
+    <color name="progressViewProgress3">#9db3c8</color>
+    <color name="progressViewInner">#FFFFFF</color>
+    <color name="progressViewOuter">#000000</color>
+
 </resources>

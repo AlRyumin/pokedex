@@ -2,6 +2,8 @@ package com.alryu.pokedex.data
 
 data class PokemonInfoResponse(
     val id: String,
+    val height: String,
+    val weight: String,
     val name: String,
     val abilities: List<Ability>
 ) {

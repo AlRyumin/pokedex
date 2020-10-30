@@ -2,6 +2,7 @@ package com.alryu.pokedex.presentation.details
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,8 +72,9 @@ class PokemonDetailsFragment : Fragment() {
     }
 
     fun setData(data: PokemonDetails) {
-        val hp = Random.nextInt(20, 80)
         name.text = data.name
+        height.text = String.format("%.1f M", data.height.toFloat() / 10)
+        weight.text = String.format("%.1f KG", data.weight.toFloat() / 10)
 
         if(data.abilities.isEmpty()){
             abilities.visibility = View.GONE
@@ -85,17 +87,33 @@ class PokemonDetailsFragment : Fragment() {
             abilitiesList.adapter = arrayAdapter
         }
 
+        initProgressView()
+
         Picasso.get()
             .load(data.imageUrl)
             .into(image)
 
-        hpProgress(hp)
     }
 
-    fun hpProgress(max: Int){
-        val animator = ObjectAnimator.ofInt(progressHp, "progress", 0, max)
-        animator.interpolator = DecelerateInterpolator()
-        animator.duration = 1000
-        animator.start()
+    fun initProgressView(){
+        val max = 100
+        val maxAttack = 20
+        val maxDefence = 15
+
+        val hp = Random.nextInt(10, max)
+        val attack = Random.nextInt(1, maxAttack)
+        val defence = Random.nextInt(1, maxDefence)
+
+        progressHp.labelText = "HP: ${hp}"
+        progressHp.max = max.toFloat()
+        progressHp.progress = hp.toFloat()
+
+        progressAttack.labelText = "Attack: ${attack}"
+        progressAttack.max = maxAttack.toFloat()
+        progressAttack.progress = attack.toFloat()
+
+        progressDefence.labelText = "Defence: ${defence}"
+        progressDefence.max = maxDefence.toFloat()
+        progressDefence.progress = defence.toFloat()
     }
 }
