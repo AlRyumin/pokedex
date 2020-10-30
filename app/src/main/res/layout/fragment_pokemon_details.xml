@@ -64,10 +64,10 @@
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/height"
         app:progressView_colorBackground="@color/progressViewBackground"
         app:progressView_colorProgress="@color/progressViewProgress"
@@ -81,10 +81,10 @@
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressHp"
         app:progressView_colorBackground="@color/progressViewBackground"
         app:progressView_colorProgress="@color/progressViewProgress2"
@@ -98,10 +98,10 @@
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressAttack"
         app:progressView_colorBackground="@color/progressViewBackground"
         app:progressView_colorProgress="@color/progressViewProgress3"
@@ -122,14 +122,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressDefence" />
 
-    <ListView
-        android:id="@+id/abilitiesList"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abilities" />
+        app:layout_constraintTop_toBottomOf="@+id/abilities">
 
+        <ListView
+            android:id="@+id/abilitiesList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+    </ScrollView>
 
     <TextView
         android:id="@+id/errorView"
