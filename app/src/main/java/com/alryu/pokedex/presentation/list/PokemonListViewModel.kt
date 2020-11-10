@@ -4,14 +4,19 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.alryu.pokedex.data.PokemonRepositoryImpl
 import com.alryu.pokedex.domain.Pokemon
 import com.alryu.pokedex.domain.PokemonRepository
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class PokemonListViewModel (
     val repository: PokemonRepository
 ) : ViewModel() {
+
+    private val _isLoadedData = MutableLiveData<Boolean>(false)
 
     private val _isLoadingLiveData = MutableLiveData<Boolean>()
     val isLoadingLiveData: LiveData<Boolean> = _isLoadingLiveData
@@ -23,9 +28,13 @@ class PokemonListViewModel (
     val contentLiveData: LiveData<List<Pokemon>> = _contentLiveData
 
     fun loadData() {
-        showLoading()
+        if(!_isLoadedData.value!!){
+            showLoading()
+            _isLoadedData.value = true
+        }
 
-        Handler().postDelayed({
+        viewModelScope.launch {
+            delay(1000L)
             if (Random.nextInt() % 10  == 0) {
                 showError()
             } else {
@@ -39,7 +48,7 @@ class PokemonListViewModel (
                     }
                 })
             }
-        }, 3000)
+        }
     }
 
     private fun showLoading() {

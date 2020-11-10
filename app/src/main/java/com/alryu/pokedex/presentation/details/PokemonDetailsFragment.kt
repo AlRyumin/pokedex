@@ -1,20 +1,17 @@
 package com.alryu.pokedex.presentation.details
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.alryu.pokedex.R
 import com.alryu.pokedex.domain.PokemonDetails
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.*
 import kotlinx.android.synthetic.main.fragment_pokemon_list.errorView
 import kotlinx.android.synthetic.main.item_pokemon.image
@@ -89,10 +86,7 @@ class PokemonDetailsFragment : Fragment() {
 
         initProgressView()
 
-        Picasso.get()
-            .load(data.imageUrl)
-            .into(image)
-
+        image.load(data.imageUrl)
     }
 
     fun initProgressView(){

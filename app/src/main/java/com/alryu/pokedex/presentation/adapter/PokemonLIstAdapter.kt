@@ -8,10 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.alryu.pokedex.R
 import com.alryu.pokedex.domain.Pokemon
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 
 class PokemonListAdapter: ListAdapter<Pokemon, PokemonListAdapter.PokemonViewHolder>(PokemonItemDiffCallback()) {
 
@@ -43,17 +42,7 @@ class PokemonListAdapter: ListAdapter<Pokemon, PokemonListAdapter.PokemonViewHol
 
             name.text = pokemon.name
 
-            Picasso.get()
-                .load(pokemon.imageUrl)
-                .into(image, object: Callback {
-                    override fun onSuccess() {
-                        Log.d("Adapter","Loaded")
-                    }
-
-                    override fun onError(e: Exception?) {
-                        Log.d("Adapter","Error", e)
-                    }
-                })
+            image.load(pokemon.imageUrl)
         }
     }
 
